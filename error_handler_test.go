@@ -5,6 +5,10 @@ import (
 	"testing"
 )
 
+type Name struct {
+	Value string
+}
+
 func TestDeferError(t *testing.T) {
 	defer HandleError()
 	ok := false

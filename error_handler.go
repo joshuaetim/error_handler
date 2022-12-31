@@ -11,10 +11,6 @@ import (
 	"unicode"
 )
 
-type Name struct {
-	Value string
-}
-
 var (
 	ErrNilPointer   = "nil pointer dereference"
 	ErrOutOfRange   = "index out of range"
@@ -31,6 +27,7 @@ func HandleError() {
 		filename, line := fileNameLine[0], strings.Split(fileNameLine[1], " ")[0]
 		fnName := strings.Split(stackArray[7], "(")[0]
 
+		// error messages
 		errString := fmt.Sprintf("%v", err)
 		errorMessage := ""
 		switch {
@@ -48,14 +45,15 @@ func HandleError() {
 		fmt.Println(strings.Repeat("=", 100))
 		firstSlash := strings.Index(filename, "/")
 
-		// get code
+		// get code from file
 		f, err := os.Open(filename[firstSlash:])
 		if err != nil {
 			log.Fatal(err)
 		}
 		defer f.Close()
 		in := bufio.NewScanner(f)
-		// 5 before, 2 after
+
+		// extract lines, 5 before, 2 after
 		codeText := []string{}
 		var lineNum int = 0
 		lineInt, _ := strconv.ParseInt(line, 10, 64)
@@ -68,8 +66,12 @@ func HandleError() {
 				break
 			}
 		}
-		preceding, countBefore := "", 0
 
+		// the line with the error
+		// "preceding" is the non-letter character to be added to the "underline"
+		// "countBefore" counts spaces to skip before the "underline"
+
+		preceding, countBefore := "", 0
 		codeTextOfInterest := codeText[5]
 		for i := 0; i < len(codeTextOfInterest); i++ {
 			if !unicode.IsLetter(rune(codeTextOfInterest[i])) {
@@ -80,7 +82,8 @@ func HandleError() {
 			}
 		}
 		lineUnder := strings.Repeat("~", len(codeTextOfInterest)-countBefore)
-		// fmt.Printf("%s%s\n", preceding, lineUnder)
+
+		// print each line
 		for i := 0; i < len(codeText); i++ {
 			lineNum := int(lineInt) + i + -5
 			fmt.Printf("%d  %s\n", lineNum, codeText[i])
