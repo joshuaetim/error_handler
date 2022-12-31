@@ -6,8 +6,8 @@ import (
 )
 
 func TestDeferError(t *testing.T) {
-	ok := false
 	defer HandleError()
+	ok := false
 	GetOrders()
 	if ok = true; ok {
 		t.Error("this part of code should be unreachable")
