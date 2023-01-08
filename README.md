@@ -7,7 +7,7 @@ error_handler is an attempt to make debugging easier for programmers and non-pro
 In your project import the public package:
 
 ```bash
-go get github.com/joshuaetim/error_handler
+go get github.com/joshuaetim/error_handler/v2
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/joshuaetim/error_handler"
+	"github.com/joshuaetim/error_handler/v2"
 )
 
 func main() {
