@@ -15,6 +15,7 @@ type ErrorHandler struct {
 	Config *Config
 }
 
+// NewErrorHandler returns a new instance of ErrorHandler
 func NewErrorHandler(config *Config) *ErrorHandler {
 	if config == nil {
 		config = &Config{}
@@ -24,6 +25,7 @@ func NewErrorHandler(config *Config) *ErrorHandler {
 	}
 }
 
+// HandleError handles the panic and returns error
 func (h *ErrorHandler) HandleError() {
 	if err := recover(); err != nil {
 		recover()

@@ -21,7 +21,10 @@ import (
 )
 
 func main() {
-	defer error_handler.HandleError()
+	handler := errorV2.NewErrorHandler(&errorV2.Config{
+		PreferredColor: errorV2.ColorRed,
+	})
+	defer handler.HandleError()
 
 	num := 0
 	main := 4 / num
