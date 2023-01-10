@@ -21,8 +21,8 @@ import (
 )
 
 func main() {
-	handler := errorV2.NewErrorHandler(&errorV2.Config{
-		PreferredColor: errorV2.ColorRed,
+	handler := error_handler.NewErrorHandler(&error_handler.Config{
+		PreferredColor: error_handler.ColorRed,
 	})
 	defer handler.HandleError()
 
